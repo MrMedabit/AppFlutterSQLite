@@ -9,34 +9,42 @@ class LibroConsulta extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.add),
-          onPressed: () {
-            Navigator.pushNamed(context, LibroCrear.ROUTE,
-                arguments: Libro.empty());
-          },
+      appBar: AppBar(
+        title: Center(
+          child: Text("Libros"),
         ),
-        appBar: AppBar(
-          title: Center(
-            child: Text("Libros"),
-          ),
+      ),
+      drawer: Drawer(
+        elevation: 5,
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            DrawerHeader(
+              child: Center(
+                  child: Text(
+                "Biblioteca",
+                style: TextStyle(color: Colors.white, fontSize: 35),
+              )),
+              decoration: BoxDecoration(color: Colors.indigo[900]),
+            ),
+            ListTile(
+              leading: Icon(Icons.add),
+              title: Text(
+                "Crear Nuevo",
+                style: TextStyle(fontSize: 20),
+              ),
+              onTap: () {
+                Navigator.pushNamed(context, LibroCrear.ROUTE,
+                    arguments: Libro.empty());
+              },
+            )
+          ],
         ),
-        drawer: Drawer(
-          child: ListView(
-            children: [
-              ListTile(
-                title: Text("Hola"),
-                onTap: () {},
-              )
-            ],
-          ),
-        ),
-        body: RefreshIndicator(
-          onRefresh: () {},
-          child: Container(
-            child: _MyList(),
-          ),
-        ));
+      ),
+      body: Container(
+        child: _MyList(),
+      ),
+    );
   }
 }
 
